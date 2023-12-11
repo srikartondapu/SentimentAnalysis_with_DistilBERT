@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Sentiment Analysis Flask App</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Sentiment Analysis Flask App</h1>
+        <form method="post" action="/predict">
+            <label for="user_input">Enter text:</label>
+            <input type="text" id="user_input" name="user_input" required>
+            <button type="submit">Predict Sentiment</button>
+        </form>
+        {% if user_input %}
+            <div class="result">
+                <p><strong>Input:</strong> {{ user_input }}</p>
+            </div>
+        {% endif %}
+        {% if sentiment %}
+            <div class="result">
+                <p><strong>Sentiment:</strong> {{ sentiment }}</p>
+                {% if probabilities %}
+                    <p><strong>Positive Probability:</strong> {{ probabilities[1] }}</p>
+                    <p><strong>Negative Probability:</strong> {{ probabilities[0] }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
